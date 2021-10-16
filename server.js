@@ -1,32 +1,66 @@
-const express = require('express');
-const bodyparser = require('body-parser');
-const cors = require('cors');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const jwt = require("express-jwt")
+const jwks = require("jwks-rsa")
+const axios = require("axios")
+const AssertApi = require('./api/assert.api')
+const userlogin = require('./controller/login.route')
 
+require("dotenv").config();
 const app = express();
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-  };
-  
-  app.use(cors(corsOptions));
-  
-  // parse requests of content-type - application/json
-  app.use(bodyParser.json());
-  
-  // parse requests of content-type - application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: true }));
-  
-  const db = require("./app/models");
-  db.sequelize.sync();
+const PORT = process.env.PORT || 8089;
+
+app.use(cors());
+app.use(bodyParser.json());
+
+// const verifyJwt = jwt({
+//     secret: jwks.expressJwtSecret({
+//         cache: true,
+//           rateLimit: true,
+//           jwksRequestsPerMinute: 5,
+//           jwksUri: 'https://dev-p8n2oo9f.us.auth0.com/.well-known/jwks.json'
+//     }),
+//     audience: "this is unique idetifier",
+//     issuer:'https://dev-p8n2oo9f.us.auth0.com/',
+//     algorithms: ['RS256']
+
+// }).unless({ path:['/assert']});
+
+// app.use(verifyJwt)
+// app.use(bodyParser.json());
+
+const MONGODB_URL = process.env.MONGODB_URL;
+
+mongoose.connect(MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true, 
+}, (error) => {
+    if (error) {
+        console.log('Database Error: ', error.message);
+    }
+});
+
+const connection = mongoose.connection;
+connection.once("open", () => {
+    console.log("mongodb connection success");
+})
 
 
-  // simple route
-  app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
-  });
-  
-  // set port, listen for requests
-  const PORT = process.env.PORT || 8080;
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-  });
+app.route('/').get((req, res) => {
+    res.send('Maintenance Module');
+});
+
+app.route('/protected').get((req, res) => {
+    res.send('Maintenance Module protected');
+});
+app.use('/assert',AssertApi());
+app.use('/userlogin', userlogin);
+
+
+app.listen(PORT, () => {
+    console.log('Server is up and running on port number:' + PORT)
+});
