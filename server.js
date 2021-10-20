@@ -8,6 +8,8 @@ const jwks = require("jwks-rsa")
 const axios = require("axios")
 const AssertApi = require('./api/assert.api')
 const userlogin = require('./controller/login.route')
+const { sendEmail } = require('./controller/email/mail');
+const cookieParser = require('cookie-parser');
 
 require("dotenv").config();
 const app = express();
@@ -16,6 +18,9 @@ const PORT = process.env.PORT || 8089;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+
+app.use(cookieParser());
 
 // const verifyJwt = jwt({
 //     secret: jwks.expressJwtSecret({
@@ -59,6 +64,12 @@ app.route('/protected').get((req, res) => {
 });
 app.use('/assert',AssertApi());
 app.use('/userlogin', userlogin);
+
+app.post("/api/sendMail", (req, res) => {
+    console.log(req.body)
+    sendEmail(req.body.email, req.body.name, "hello")
+
+})
 
 
 app.listen(PORT, () => {
