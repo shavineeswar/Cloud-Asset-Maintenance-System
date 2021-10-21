@@ -43,7 +43,7 @@ const sendEmail = (to, name, type) => {
 
     const mail = getEmailData(to, name, type)
 
-    cron.schedule('* * * * * *',() =>{
+    cron.schedule('* * * */6 *',() =>{
         // smtpTransport.sendMail(mail, function(error, response) {
         //     if(error) {
         //         console.log(error)

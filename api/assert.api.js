@@ -5,6 +5,7 @@ const controller = require('../controller/asset.controller');
 module.exports = function () {
   router.post('/create', controller.createAssert);
   router.get('/getall', controller.getAllAsserts);
+  router.get('/:id', controller.getAssetById);
   
 
   return router;

@@ -1,9 +1,9 @@
-const Assert = require('../models/asset.model');
+const Alert = require('../models/alert.model');
 
-const createAssert = async (req, res) => {
+const createAlert = async (req, res) => {
     if (req.body) {
-        const assert = new Assert(req.body);
-        assert.save()
+        const alert = new Alert(req.body);
+        alert.save()
             .then(data => {
                 res.status(200).send({ data: data });
             })
@@ -13,8 +13,8 @@ const createAssert = async (req, res) => {
     }
 }
 
-const getAllAsserts = async (req, res) => {
-    await Assert.find({})
+const getAllAlerts = async (req, res) => {
+    await Alert.find({})
         .then(data => {
             res.status(200).send({ data: data });
         })
@@ -23,8 +23,8 @@ const getAllAsserts = async (req, res) => {
         });
 }
 
-// const getApprovedAsserts = async (req, res) => {
-//     await Assert.find({Status:'Approved'})
+// const getApprovedAlerts = async (req, res) => {
+//     await Alert.find({Status:'Approved'})
 //         .then(data => {
 //             res.status(200).send({ data: data });
 //         })
@@ -70,9 +70,9 @@ const getAllAsserts = async (req, res) => {
 // }
 
 
-const getAssetById = async (req, res) => {
+const getAlertById = async (req, res) => {
     if (req.params && req.params.id) {
-      await Assert.findById(req.params.id)
+      await Alert.findById(req.params.id)
       .then(data => {
         res.status(200).send({data: data});
       })
@@ -112,13 +112,13 @@ const getAssetById = async (req, res) => {
 
 
 module.exports = {
-  createAssert,
-    getAllAsserts,
+  createAlert,
+    getAllAlerts,
     // getApprovedWorkshops,
     // getUnapprovedWorkshops,
     // getIdofworkshopsforApprove,
     // getIdofworkshopsforUnapprove,
-    getAssetById,
+    getAlertById,
     // getApproveWorkshopByEmail,
     // getUnapproveWorkshopByEmail
 };
