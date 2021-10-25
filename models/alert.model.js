@@ -7,8 +7,8 @@ const AlertSchema = new mongoose.Schema({
     period: { type: String, required: true },
     alert1: { type: String, required: true },
     alert2: { type: String, required: true },
-    alert3: { type: String, required: true },
-    alert4: { type: String, required: true },
+    alert3: { type: String },
+    alert4: { type: String },
     
     
 });

@@ -7,6 +7,7 @@ const jwt = require("express-jwt")
 const jwks = require("jwks-rsa")
 const axios = require("axios")
 const AssetApi = require('./api/assert.api')
+const AlertApi = require('./api/alert.api')
 const userlogin = require('./controller/login.route')
 const { sendEmail } = require('./controller/email/mail');
 const cookieParser = require('cookie-parser');
@@ -63,6 +64,7 @@ app.route('/protected').get((req, res) => {
     res.send('Maintenance Module protected');
 });
 app.use('/asset',AssetApi());
+app.use('/alert',AlertApi());
 app.use('/userlogin', userlogin);
 
 app.post("/api/sendMail", (req, res) => {

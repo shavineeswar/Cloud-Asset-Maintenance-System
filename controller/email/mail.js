@@ -11,7 +11,7 @@ const getEmailData = (to, name, template) => {
             data = {
                 from: "Eeswar",
                 to,
-                subject: `Hello ${name}`,
+                subject: `Asset Pro Maintenance Remainder`,
                 html: Hello()
             }
             break;
@@ -44,14 +44,14 @@ const sendEmail = (to, name, type) => {
     const mail = getEmailData(to, name, type)
 
     cron.schedule('* * * */6 *',() =>{
-        // smtpTransport.sendMail(mail, function(error, response) {
-        //     if(error) {
-        //         console.log(error)
-        //     } else {
+        smtpTransport.sendMail(mail, function(error, response) {
+            if(error) {
+                console.log(error)
+            } else {
                 console.log( " email sent successfully")
-        //     }
-        //     smtpTransport.close();
-        // });
+            }
+            smtpTransport.close();
+        });
     
     })
     
