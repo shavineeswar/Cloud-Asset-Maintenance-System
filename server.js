@@ -8,6 +8,8 @@ const jwks = require("jwks-rsa")
 const axios = require("axios")
 const AssetApi = require('./api/assert.api')
 const AlertApi = require('./api/alert.api')
+const InternalWork = require('./api/internalworkorder.api')
+const Person = require('./api/peroson.api')
 const userlogin = require('./controller/login.route')
 const { sendEmail } = require('./controller/email/mail');
 const cookieParser = require('cookie-parser');
@@ -66,6 +68,8 @@ app.route('/protected').get((req, res) => {
 app.use('/asset',AssetApi());
 app.use('/alert',AlertApi());
 app.use('/userlogin', userlogin);
+app.use('/internalwork',InternalWork());
+app.use('/person',Person());
 
 app.post("/api/sendMail", (req, res) => {
     console.log(req.body)
