@@ -5,8 +5,9 @@ const BlogSchema = new mongoose.Schema({
     Content: { type: String, required: true },
     PhotoLink: { type: String, required: true },
     Dateofpost: { type: String, required: true },
-    Writer: { type: String, required: true },
-   
+    Writer: { type: String },
+    Subject: { type: String, required: true }
+
 
 });
 

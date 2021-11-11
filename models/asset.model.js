@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const AssertSchema = new mongoose.Schema({
+    Type: { type: String, required: true },
+    Name: { type: String, required: true },
     TypeCategory1: { type: String, required: true },
     TypeCategory2: { type: String, required: true },
     NameofSpecification: { type: String, required: true },

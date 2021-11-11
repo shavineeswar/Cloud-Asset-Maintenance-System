@@ -6,6 +6,7 @@ module.exports = function () {
   router.post('/create', controller.createAssert);
   router.get('/getall', controller.getAllAsserts);
   router.get('/:id', controller.getAssetById);
+  router.get('/count', controller.getAssetCount);
   
 
   return router;

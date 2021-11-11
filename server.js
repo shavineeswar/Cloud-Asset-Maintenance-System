@@ -10,12 +10,17 @@ const AssetApi = require('./api/assert.api')
 const AlertApi = require('./api/alert.api')
 const InternalWork = require('./api/internalworkorder.api')
 const Person = require('./api/peroson.api')
+const Blog = require('./api/blog.api')
 const userlogin = require('./controller/login.route')
 const { sendEmail } = require('./controller/email/mail');
 const cookieParser = require('cookie-parser');
 
 require("dotenv").config();
 const app = express();
+
+
+
+
 
 const PORT = process.env.PORT || 8089;
 
@@ -70,6 +75,7 @@ app.use('/alert',AlertApi());
 app.use('/userlogin', userlogin);
 app.use('/internalwork',InternalWork());
 app.use('/person',Person());
+app.use('/blog',Blog());
 
 app.post("/api/sendMail", (req, res) => {
     console.log(req.body)
