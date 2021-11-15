@@ -25,5 +25,5 @@ const AssertSchema = new mongoose.Schema({
 
 });
 
-const Assert = mongoose.model('assert', AssertSchema);
+const Assert = mongoose.model('asset', AssertSchema);
 module.exports = Assert;

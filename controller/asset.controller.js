@@ -37,8 +37,7 @@ const getAssetById = async (req, res) => {
   }
 
   const getAssetCount = async (req, res) => {
-    if (req.params && req.params.id) {
-      await Assert.countDocuments({Type: "Transformer"})
+      await Assert.countDocuments()
       .then(data => {
         res.status(200).send({data: data});
       })
@@ -46,7 +45,6 @@ const getAssetById = async (req, res) => {
         res.status(500).send({ error: error.message });
       });
     }
-  }
 
 
 
