@@ -12,6 +12,7 @@ const InternalWork = require('./api/internalworkorder.api')
 const Person = require('./api/peroson.api')
 const Blog = require('./api/blog.api')
 const ExternalWork = require('./api/externalwork.api')
+const Cart = require('./api/cart.api')
 const userlogin = require('./controller/login.route')
 const { sendEmail } = require('./controller/email/mail');
 const cookieParser = require('cookie-parser');
@@ -78,6 +79,8 @@ app.use('/internalwork',InternalWork());
 app.use('/person',Person());
 app.use('/blog',Blog());
 app.use('/externalwork',ExternalWork());
+app.use('/cart',Cart());
+
 
 app.post("/api/sendMail", (req, res) => {
     console.log(req.body)

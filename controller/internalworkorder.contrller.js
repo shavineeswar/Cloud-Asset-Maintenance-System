@@ -48,6 +48,7 @@ const getInternalworkById = async (req, res) => {
       });
     }
   }
+  
   const getPersonByAssetId = async (req, res) => {
     if (req.params && req.params.id) {
       await Internalwork.find({assetId:req.params.id}).populate('person', '_id personName department')
