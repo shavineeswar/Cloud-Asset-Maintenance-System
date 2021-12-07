@@ -4,7 +4,7 @@ const { Hello } = require("./hello_temp");
 const { Thanks } = require("./thankyou_tepm");
 const { External } = require("./external_temp");
 
-const getEmailData = (to, name, template) => {
+const getEmailData = (to, template) => {
     let data = null;
 
     switch (template) {
@@ -21,7 +21,7 @@ const getEmailData = (to, name, template) => {
             data = {
                 from: "John Ahn <jaewon@gmail.com>",
                 to,
-                subject: `Hello ${name}`,
+                subject: `Hello`,
                 html: Thanks()
             }
             break;
@@ -30,7 +30,7 @@ const getEmailData = (to, name, template) => {
             data = {
                 from: "AssetPro Maintenance Team",
                 to,
-                subject: `Hello ${name}`,
+                subject: `Asset Pro Maintenance`,
                 html: External()
             }
             break;
@@ -42,29 +42,32 @@ const getEmailData = (to, name, template) => {
 }
 
 
-const sendEmail = (to, name, type) => {
+const sendEmail = (to, type) => {
 
     const smtpTransport = mailer.createTransport({
         service: "Gmail",
+        port: 465,
+        logger: true,
+        debug: true,
         auth: {
             user: "shavineeswar@gmail.com",
             pass: "St.anthonys3"
         }
     })
 
-    const mail = getEmailData(to, name, type)
+    const mail = getEmailData(to, type)
 
-    cron.schedule('* * * */6 *', () => {
-        smtpTransport.sendMail(mail, function (error, response) {
-            if (error) {
-                console.log(error)
-            } else {
-                console.log(" email sent successfully")
-            }
-            smtpTransport.close();
-        });
+    // cron.schedule('* * * */6 *', () => {
+    smtpTransport.sendMail(mail, function (error, response) {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(" email sent successfully")
+        }
+        smtpTransport.close();
+    });
 
-    })
+    // })
 
 
 }

@@ -28,7 +28,7 @@ const getTransformerTestByAssetId = async (req, res) => {
 
   const EditTransformerTest= async (req, res) => {
     if (req.params && req.params.id) {
-    await TransformerTest.update({assetId:req.params.id},{$set:{
+    await TransformerTest.updateOne({assetId:req.params.id},{$set:{
                                                         Test1: req.body.Test1, 
                                                         Test2: req.body.Test2 , 
                                                         Test3: req.body.Test3 , 

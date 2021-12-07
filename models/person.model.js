@@ -5,6 +5,8 @@ const PersonSchema = new mongoose.Schema({
     
     department: {type: String, required: true},
     personName: {type: String, required: true},
+    email: {type: String, required: true},
+    phone: {type: String, required: true},
     
     
     

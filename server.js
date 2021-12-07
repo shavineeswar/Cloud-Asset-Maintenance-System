@@ -15,6 +15,8 @@ const ExternalWork = require('./api/externalwork.api')
 const Cart = require('./api/cart.api')
 const Product = require('./api/product.api')
 const TransformerTest = require('./api/transfromerTest.api')
+const Schedule = require('./api/schedule.api')
+const Test = require('./api/test.api')
 const userlogin = require('./controller/login.route')
 const { sendEmail } = require('./controller/email/mail');
 const cookieParser = require('cookie-parser');
@@ -84,11 +86,13 @@ app.use('/externalwork',ExternalWork());
 app.use('/cart',Cart());
 app.use('/product',Product());
 app.use('/transformertest',TransformerTest());
+app.use('/schedule',Schedule());
+app.use('/test',Test());
 
 
 app.post("/api/sendMail", (req, res) => {
-    console.log(req.body)
-    sendEmail(req.body.email, req.body.name, req.body.template)
+    console.log(req.body.email)
+    sendEmail(req.body.email,req.body.template)
 
 })
 

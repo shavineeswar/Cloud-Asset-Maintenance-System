@@ -23,6 +23,15 @@ const getAllInternalworks = async (req, res) => {
         });
 }
 
+const getInternalworkByAssetName = async (req, res) => {
+  await Internalwork.find({assetId:req.params.id}).populate("assetId",'Type Name' )
+      .then(data => {
+          res.status(200).send({ data: data.assetId });
+      })
+      .catch(error => {
+          res.status(500).send({ error: error.message });
+      });
+}
 
 
 const getInternalworkById = async (req, res) => {
@@ -61,12 +70,24 @@ const getInternalworkById = async (req, res) => {
     }
   }
 
+  const getInternalCount = async (req, res) => {
+    await Internalwork.countDocuments({assetId:req.params.id})
+    .then(data => {
+      res.status(200).send({data: data});
+    })
+    .catch(error => {
+      res.status(500).send({ error: error.message });
+    });
+  }
+
 
 module.exports = {
     createInternalwork,
     getAllInternalworks,
     getInternalworkById,
     getInternalworkByAssetId,
-    getPersonByAssetId  
+    getPersonByAssetId,
+    getInternalCount,
+    getInternalworkByAssetName  
     
 };
