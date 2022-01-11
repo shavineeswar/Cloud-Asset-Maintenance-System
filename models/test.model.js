@@ -7,6 +7,8 @@ const EventSchema = new mongoose.Schema({
         name: String, 
         eventfrequency: String,
         duedate: String,
+        requiredEquipment: String,
+        requiredMatirial: String,
         assign: Boolean
     }]
 
