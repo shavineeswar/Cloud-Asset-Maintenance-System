@@ -18,6 +18,7 @@ const TransformerTest = require('./api/transfromerTest.api')
 const Schedule = require('./api/schedule.api')
 const Test = require('./api/test.api')
 const userlogin = require('./controller/login.route')
+const Events = require('./api/event.api')
 const { sendEmail } = require('./controller/email/mail');
 const cookieParser = require('cookie-parser');
 
@@ -88,7 +89,7 @@ app.use('/product',Product());
 app.use('/transformertest',TransformerTest());
 app.use('/schedule',Schedule());
 app.use('/test',Test());
-
+app.use('/events',Events());
 
 app.post("/api/sendMail", (req, res) => {
     console.log(req.body.email)
