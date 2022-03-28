@@ -10,7 +10,8 @@ module.exports = function () {
   router.get('/getperson/:id', controller.getPersonByAssetId);
   router.get('/count/:id', controller.getInternalCount);
   router.get('/getassetname/:id', controller.getInternalworkByAssetName);
-  
+  router.put('/edit/:id', controller.EditInternalWorkorder);
+ 
 
 
   return router;

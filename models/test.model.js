@@ -3,12 +3,9 @@ const mongoose = require('mongoose');
 const EventSchema = new mongoose.Schema({
 
     assetId: { type: String, required: true },
-    Events: [{
-        name: String, 
-        eventfrequency: String,
+    Events:[{
+        event:{ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'events' } ,
         duedate: String,
-        requiredEquipment: String,
-        requiredMatirial: String,
         assign: Boolean
     }]
 

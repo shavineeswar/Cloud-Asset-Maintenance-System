@@ -79,7 +79,18 @@ const getInternalworkById = async (req, res) => {
       res.status(500).send({ error: error.message });
     });
   }
-
+  const EditInternalWorkorder= async (req, res) => {
+    if (req.params && req.params.id) {
+    await Internalwork.updateOne({_id:req.params.id},{$set:{
+                                                         status: req.body.status }})
+    .then(data => {
+      res.status(200).send("Details updated");
+    })
+    .catch(error => {
+      res.status(500).send({ error: error.message });
+    });
+  }
+}
 
 module.exports = {
     createInternalwork,
@@ -88,6 +99,7 @@ module.exports = {
     getInternalworkByAssetId,
     getPersonByAssetId,
     getInternalCount,
-    getInternalworkByAssetName  
+    getInternalworkByAssetName,
+    EditInternalWorkorder  
     
 };
